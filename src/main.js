@@ -1,8 +1,14 @@
-import Vue from 'vue'
-import App from './App.vue'
+import { Element, createElement, render, renderDom } from './element'
 
-Vue.config.productionTip = false
+const virtualDom = createElement(
+  'ul',
+  { class: 'list'},
+  [
+    createElement('li', { class: 'item1' }, ['马云']),
+    createElement('li', { class: 'item2' }, ['马云2']),
+    createElement('li', { class: 'item3' }, ['马云3']),
+  ]
+)
+const dom = render(virtualDom)
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+renderDom(dom, document.getElementById('app'))
