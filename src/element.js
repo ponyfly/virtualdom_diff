@@ -1,9 +1,9 @@
 // 定义js对象元素
 class Element {
   constructor(type, props, children) {
-    this.type = type
-    this.props = props
-    this.children = children
+    this.type = type // 节点类型 标签/文本
+    this.props = props // 标签节点属性值
+    this.children = children // 子节点 虚拟dom节点或文本节点
   }
 }
 
@@ -59,4 +59,5 @@ export {
   createElement,
   render,
   renderDom,
+  setAttr
 }
