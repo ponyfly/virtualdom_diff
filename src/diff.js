@@ -1,3 +1,8 @@
+const REMOVE = 'REMOVE'
+const TEXT = 'TEXT'
+const ATTR = 'ATTR'
+const REPLACE = 'REPLACE'
+
 function diff(oldTree, newTree) {
   const patches = {}
 
@@ -12,19 +17,19 @@ function walk(oldNode, newNode, index, patches) {
   const current = []
 
   if (!newNode) {
-    current.push({ type: 'REMOVE', index })
+    current.push({ type: REMOVE, index })
   } else if (isString(oldNode) && isString(newNode)) {
     if(newNode !== oldNode) {
-      current.push({ type: 'TEXT', text: newNode })
+      current.push({ type: TEXT, text: newNode })
     }
   } else if (oldNode.type === newNode.type) {
     let attr = diffAttr(oldNode.props, newNode.props)
     if (Object.keys(attr).length > 0) {
-      current.push({ type: 'ATTR', attr })
+      current.push({ type: ATTR, attr })
     }
     diffChildren(oldNode.children, newNode.children, patches)
   } else {
-    current.push({ type: 'REPLACE', newNode })
+    current.push({ type: REPLACE, newNode })
   }
 
   if (current.length) {
